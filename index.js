@@ -4,16 +4,16 @@ var xel = require('exceldragon').countExcel;
 var pdf = require('pdfdragon').pdfGen;
 var jsn = require('jsondragon').jsonGen;
 
-exports.formatArray = function (output, tail) {
+exports.formatArray = function (output, name) {
 
-	xel(output, tail);
-	pdf(output, tail);
-	jsn(output, tail);
+	xel(output, name);
+	pdf(output, name);
+	jsn(output, name);
 } 
 
-exports.formatOutput = function (tail) {
+exports.formatOutput = function (tail, outfile) {
 
-	var output = fs.readFileSync('./output/output' + tail + '.txt', 'utf-8').split('\n');
+	var output = fs.readFileSync(outfile + tail + '.txt', 'utf-8').split('\n');
 
 	for (var x = 0; x < output.length; x++) {
 		output[x] = output[x].replace('@', ', ').substring(4, output[x].length + 1);
@@ -27,7 +27,7 @@ exports.formatOutput = function (tail) {
 
 exports.filterOutput = function (tail, filter) {
 
-	var output = fs.readFileSync('./output/output' + tail + '.txt', 'utf-8').split('\n');
+	var output = fs.readFileSync(outfile + tail + '.txt', 'utf-8').split('\n');
 	var newOut = [];
 	var count = 0;
 
